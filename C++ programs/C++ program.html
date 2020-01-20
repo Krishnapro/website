@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> project</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="../mystyle2.css"/>
+	<link rel="stylesheet"href="../resources/highlightjs/styles/default.css">
+	<script src="../resources/highlightjs/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+  	<link rel="stylesheet" href="../resources/bootstrap/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
+	</head>
+
+	<body>
+		<!--first section for header-->
+	<div class="container_head">
+		<div id="logo_right">
+					<form>
+ 						<input id="text_style" type="text" name="textbox">
+ 						<input id="button_style" type="button" name="search" value="Search">
+ 					</form>
+				</div>
+		<div class="wraper_head">
+			<div id="logo_left">
+				<img src="../image/logo.png"/>
+			</div>
+				 
+				<div id="clear">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--section for menu-->
+	<div class="container_menu">
+		<div class="wraper_menu">
+			<div id="menu">
+			<ul>
+			<li><a href="../main.html"> Home</a></li>
+			<li><a href="#"> Language</a>
+				<ul id="submenu">
+					<li><a href="../C%20language.html">C</a></li>
+					<li><a href="../C++%20language.html">C++</a></li>
+					<li><a href="../java%20language.html">Java</a></li>
+
+				</ul>
+			</li>
+			<li><a href="#"> D.S</a>
+				<ul>
+					<li><a href="../DS%20with%20c.html">with C</a></li>
+					<li><a href="../DS%20with%20c++.html">with C++</a></li>
+					<li><a href="../DS%20with%20java.html">with Java</a></li>
+				</ul>
+
+			</li>
+			<li><a href="#"> Web</a>
+				<ul>
+					<li><a href="../HTML.html">HTML</a></li>
+					<li><a href="../CSS.html">CSS</a></li>
+					<li><a href="../javascript.html">Javascript</a></li>
+					<li><a href="../J%20quary%20language.html">J Quary</a></li>
+				</ul>
+			</li>
+			<li><a href="#"> Other</a></li>
+		</ul>
+			</div>
+		</div>
+		
+	</div>
+	<!--side section for sub menu and links-->
+	<div class="container_submenu">
+		<h3> SUB MENU</h3>
+		
+	</div>
+	<div class="container_Add">
+		<h3> add</h3>
+		
+		
+	</div>
+	<div class="container_body">
+		<div class="wraper_body">
+		<h2> GAME IN C++</h2>
+		<pre class="pre-scrollable">
+			<code class="C++">
+				//this is a game of random choice
+//player has to bet for a target and guess where is the specific target and he gets his bet double if is guess is right  
+
+#include &lt;iostream&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+using namespace std;
+
+int money=100;
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+class player{
+	char name[30];
+	int age;
+	public:
+		void set_player(char *nm,int ag){
+			strcpy(name,nm);
+			age = ag;
+		}
+		void get_player(){
+			cout&lt;&lt;"player name :- "&lt;&lt;name&lt;&lt;endl;
+			cout&lt;&lt;"age :- "&lt;&lt;age&lt;&lt;endl;
+			cout&lt;&lt;"\t\t\t\tCASH remaining :-"&lt;&lt;money&lt;&lt;endl;
+		}
+};
+
+void head(){
+	system("color 07");
+	cout&lt;&lt;"--------------------------------------------------------------------------------\n";
+	cout&lt;&lt;"************************welcome to the game of MAGIC CARDS**********************\n";
+	cout&lt;&lt;"--------------------------------------------------------------------------------\n";
+}
+
+void card(){
+	cout&lt;&lt;"    _____        _____        _____  \n";
+	cout&lt;&lt;"    | 1 |        | 2 |        | 3 |  \n";
+	cout&lt;&lt;"    |___|        |___|        |___|  \n";       
+}
+
+
+void start(){
+	char name [30];
+	int age;
+	
+	head();
+	cout&lt;&lt;"\t\t\t\tEnter Player Details"&lt;&lt;endl&lt;&lt;"Enter Player Name :- ";
+	cin&gt;&gt;name;
+	cout&lt;&lt;"enter your age :- ";
+	cin&gt;&gt;age;
+	system("cls");
+	head();
+	player player1;
+	player1.set_player(name,age);
+	player1.get_player();
+}
+
+int play(){
+	char ch[3] ={'j','k','q'};
+	int x,y,temp,guess;
+	head();
+	
+	cout&lt;&lt;"guess king is at which position...\n"&lt;&lt;endl;
+	card();
+	cout&lt;&lt;"shuffling...\n";
+	cin&gt;&gt;guess;
+	
+	for(int i;i&lt;5;i++)
+	{
+		x = rand() % 3;
+		y = rand() % 3;
+		temp = ch[x];
+		ch[x] = ch[y];
+		ch[y] = temp;
+	}
+
+	if(ch[guess-1]=='k')
+		return 1;
+	else
+		return 0;
+}
+int main() 
+{
+	int bet,result;
+	start();
+	while(money&gt;0)
+	{	head();
+		cout&lt;&lt;"whats your bet"&lt;&lt;endl;
+		cin&gt;&gt;bet;
+		if(bet == 0|| bet&gt;money)
+			break;
+		result=play();
+		if(result == 0)
+		{	cout&lt;&lt;"you lose\n";
+			money = money-bet;
+		}
+		else
+		{
+			cout&lt;&lt;"you won\n";
+			money=money+bet*2;
+		}
+		cout&lt;&lt;"your balance = "&lt;&lt;money&lt;&lt;endl;
+	}
+	return 0;
+}
+
+			</code>
+		</pre>
+		</div>
+	</div>
+	<div class="container_footer">
+		<div class="wraper_footer">
+			<div id="footer">
+				<h3>About us</h3>
+				<p>
+					est. Curabitur semper arcu ac ligula semper, nec luctus nisl blandit. Integer lacinia ante ac libero lobortis imperdiet. Nullam mollis convallis ipsum, ac accumsan nunc vehicula vitae. Nulla eget justo in felis tristique fringilla. Morbi
+				</p>
+
+			</div>
+			<div id="footer">
+				<h3>Contact us</h3>
+				<p>
+					est. Curabitur semper arcu ac ligula semper, nec luctus nisl blandit. Integer lacinia ante ac libero lobortis imperdiet. Nullam mollis convallis ipsum, ac accumsan nunc vehicula vitae. Nulla eget justo in felis tristique fringilla. Morbi
+				</p>
+
+			</div>
+			<div id="footer">
+				<h3>privacy policy</h3>
+				<p>
+					est. Curabitur semper arcu ac ligula semper, nec luctus nisl blandit. Integer lacinia ante ac libero lobortis imperdiet. Nullam mollis convallis ipsum, ac accumsan nunc vehicula vitae. Nulla eget justo in felis tristique fringilla. Morbi
+				</p>
+
+			</div>
+		</div>
+		
+	</div>
+     <p>  copyright <span>&#169;</span> 2020 powered by Krishna Kumar</p>
+</body>
+</html>
